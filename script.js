@@ -21,6 +21,24 @@
 // };
 // console.log(person.name);
 
-// let arr = ['plum.png', 'orange.jpg', 'apple.bmp']
-// console.log(arr[21]);
-console.log("https://vk.com/catalog/"+5);
+let persone = {
+    name:"John",
+    age:25, 
+    isMarried: false
+};
+console.log(persone["name"]);
+let arr =['plum.png', 'orange.jpg', 'apple.bmp'];
+console.log(arr[1]);
+
+let switcher = null;
+if (switcher){
+    console.log ("working...")
+}
+switcher = 1;
+if (switcher){
+    console.log ("working...")
+}
+let answer = confirm ("Are yo here?");
+console.log(answer);
+let answer2 = prompt("Are yo here?");
+console.log(answer);
