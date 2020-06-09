@@ -42,14 +42,14 @@ if (budgetDay > 1200) {
 }
 
 
-function getExpensesMonth(){
-    return amount1+amount2
-}
-getExpensesMonth()
-accumulatedMonth = function getAccumulatedMonth(){
-    return money - getExpensesMonth()
-}
-console.log(accumulatedMonth)
-// function getTargetMonth(){
-//     return mission - 
+// function getExpensesMonth(){
+//     return amount1+amount2
 // }
+// getExpensesMonth()
+// accumulatedMonth = function getAccumulatedMonth(){
+//     return money - getExpensesMonth()
+// }
+// console.log(accumulatedMonth)
+// // function getTargetMonth(){
+// //     return mission - 
+// // }
