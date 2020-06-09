@@ -25,7 +25,7 @@ var expenses1 = prompt("Введите обязательную статью р�
 var expenses2 = prompt("Введите обязательную статью расходов")
 var amount1 = +prompt("Во сколько это обойдется?")
 var amount2 = +prompt("Во сколько это обойдется?")
-var budgetMonth = amount1+amount2
+var budgetMonth = money-(amount1+amount2)
 console.log("Бюджет на месяц "+budgetMonth)
 console.log("Цель будет достигнута за: "+Math.ceil(mission/budgetMonth)+" месяцев") 
 var budgetDay = budgetMonth/30
@@ -42,9 +42,14 @@ if (budgetDay > 1200) {
 }
 
 
-// function getExpensesMonth(){
-//     return amount1+amount2
-// }
-// accumulatedMonth = function getAccumulatedMonth(){
-//     return money - getExpensesMonth()
+function getExpensesMonth(){
+    return amount1+amount2
+}
+getExpensesMonth()
+accumulatedMonth = function getAccumulatedMonth(){
+    return money - getExpensesMonth()
+}
+console.log(accumulatedMonth)
+// function getTargetMonth(){
+//     return mission - 
 // }
