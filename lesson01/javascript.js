@@ -28,7 +28,7 @@ function getExpensesMonth(){
     return amount1+amount2
 }
 getExpensesMonth();
-console.log(getExpensesMonth())
+console.log("сумма обязательных расходов "+getExpensesMonth())
 
 console.log(addExpenses)
 
@@ -44,9 +44,9 @@ function getTargetMonth(){
     return Math.ceil(mission/accumulatedMonth)
 }
 getTargetMonth();
-console.log(getTargetMonth())
+console.log("Цель будет достигнута за "+getTargetMonth()+" месяца")
 var budgetDay = Math.floor(accumulatedMonth/30);
-console.log(budgetDay)
+console.log("Дневной бюджет: "+budgetDay)
 
 function getStatusIncome(){
     if (budgetDay > 1200) {
