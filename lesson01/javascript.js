@@ -36,10 +36,10 @@ showTypeOf(deposit);
 let getExpensesMonth = function(){
     let sum=0;
    
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 4; i++) {
         expenses[i]=prompt("Введите обязательную статью расходов")
         do {
-            sum=prompt('Во сколько это обойдётся?')
+            sum += +prompt('Во сколько это обойдётся?')
         } while (!isNumber(sum));
     }
     
