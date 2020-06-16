@@ -2,6 +2,9 @@ let money;
 let isNumber = function(n){
     return !isNaN(parseFloat(n)) && isFinite(n)
 };
+let isString = function(n){
+    return isNaN(String(n))
+};
 let start = function() {
     
     do{
@@ -17,6 +20,8 @@ let appData = {
     addIncome: [],
     addExpenses: [],
     deposit: false,
+    percentDeposit: 0,
+    moneyDeposit: 0,
     mission: 50000,
     period: 0,
     budget: money,
@@ -28,17 +33,56 @@ let appData = {
     },
     
     asking: function () {
+        if(confirm("Есть ли у вас дополнительный заработок?")){
+            let itemIncome;
+            do {
+                itemIncome = prompt("Какой у вас дополнительный заработок?", "Таксую");
+            }while(itemIncome = !isString(itemIncome));
+            let cashIncome;
+            do {
+                cashIncome = prompt("Сколько в месяц вы на этом зарабатываете?", "10000");
+            } while (cashIncome = !isNumber(cashIncome));
+            appData.income[itemIncome] = cashIncome 
+        }
+             
+   //2) Возможные расходы (addExpenses) вывести строкой в консоль каждое слово с большой буквы слова разделены запятой и пробелом
+   //Пример (Интернет, Такси, Коммунальные расходы)
         let addExpenses = prompt("Перечислите возможные расходы за рассчитываемый период через запятую");
-            appData.addExpenses = addExpenses.toLowerCase().split(' ,');
+        appData.addExpenses = addExpenses.toLowerCase().split(", ");
+    //Перебираю массив с расходами 
+        for (let i = 0; i < appData.addExpenses.length; i++) {
+            //exp = каждый расход
+            let exp = appData.addExpenses[i];
+            //Делаю первую букву каждого расхода заглавной + остальные буквы, начиная со второй
+            let array = exp[0].toUpperCase() + exp.substring(1);
+            //Разделяю массив пробелом и запятой. 
+            let newAddExpenses = array.split(", ")
+            //Вывожу в консоль. Всё появляется в столбик. Как вывести в строчку не знаю.
+            console.log(newAddExpenses);
+            
+        }
+        
+
+            
+    
+        
+            
+       
+        
+        
+            
+            console.log (appData.addExpenses);
             appData.deposit = confirm("Есть ли у вас депозит в банке?")
         let question=0;
         let expense="";
         for (let i = 0; i < 2; i++) {
-            expense=prompt("Введите обязательную статью расходов");
             do {
-                question = +prompt('Во сколько это обойдётся?');
+                expense = prompt("Введите обязательную статью расходов");
+            } while (!isString(expense));
+            do {
+                question = prompt('Во сколько это обойдётся?');
             } while (!isNumber(question));
-            appData.expenses[expense]=question
+            appData.expenses[expense] = question
         }
     },
     getExpensesMonth: function () {
@@ -63,6 +107,20 @@ let appData = {
         } else if (appData.budgetDay < 0){
             return "Что то пошло не так"
         }
+    },
+    getInfoDeposit: function(){
+        if(appData.deposit){
+            do {
+                appData.percentDeposit = prompt("Какой годовой процент?", "10");  
+            } while (!isNumber(appData.percentDeposit));
+            do {
+                appData.moneyDeposit = prompt("Какая сумма", 10000);
+            } while (!isNumber(appData.moneyDeposit));
+            
+        }
+    },
+    calcSavedMoney: function(){
+        return appData.budgetMonth * appData.period;
     }
 };
 
@@ -71,10 +129,11 @@ appData.getExpensesMonth();
 appData.getBudget();
 appData.getTargetMonth();
 appData.getStatusIncome();
+appData.getInfoDeposit();
+appData.calcSavedMoney();
 console.log("Расходы за месяц "+ appData.expensesMonth);
 console.log("Цель будет достигнута за "+ appData.getTargetMonth()+" месяца");
 console.log(appData.getStatusIncome());
-
 for (let key in appData){
     console.log("Свойство: "+ key + " значение: " + appData[key]);
 }
