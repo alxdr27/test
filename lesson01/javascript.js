@@ -50,28 +50,15 @@ let appData = {
         let addExpenses = prompt("Перечислите возможные расходы за рассчитываемый период через запятую");
         appData.addExpenses = addExpenses.toLowerCase().split(", ");
     //Перебираю массив с расходами 
+        
         for (let i = 0; i < appData.addExpenses.length; i++) {
-            //exp = каждый расход
-            let exp = appData.addExpenses[i];
-            //Делаю первую букву каждого расхода заглавной + остальные буквы, начиная со второй
-            let array = exp[0].toUpperCase() + exp.substring(1);
-            //Разделяю массив пробелом и запятой. 
-            let newAddExpenses = array.split(", ")
-            //Вывожу в консоль. Всё появляется в столбик. Как вывести в строчку не знаю.
-            console.log(newAddExpenses);
+            //str = каждый расход
+            let str = appData.addExpenses[i];
             
+            appData.addExpenses[i] = str[0].toUpperCase() + str.substring(1);
         }
-        
-
+        console.log( appData.addExpenses.join(", "));
             
-    
-        
-            
-       
-        
-        
-            
-            console.log (appData.addExpenses);
             appData.deposit = confirm("Есть ли у вас депозит в банке?")
         let question=0;
         let expense="";
