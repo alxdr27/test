@@ -1,6 +1,6 @@
 const elems = document.querySelectorAll(".book"),
     collection = document.querySelector(".books"),
-    title = document.getElementsByTagName("h2")[4],
+    title = document.getElementsByTagName("a")[4],
     adv = document.querySelector(".adv"),
     list = document.getElementsByTagName("li")
     
