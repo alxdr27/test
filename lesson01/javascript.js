@@ -27,13 +27,10 @@ let depositPercent = document.querySelector(".deposit-percent");
 let targetAmount = document.querySelector(".target-amount");
 let periodAmount = document.querySelector(".period-amount");
 let periodSelect = document.querySelector(".period-select");
-
+//6) Запретить нажатие кнопки Рассчитать пока поле Месячный доход пустой, проверку поля Месячный доход в методе Start убрать.
 if (salaryAmount == "") {
     start.setAttribute(disabled, "");
 }
-
-
-
 let appData = {
     income: {},
     incomeMonth: 0,
@@ -47,9 +44,7 @@ let appData = {
     budgetMonth: 0,
     expensesMonth: 0,
     expenses: {},
-    start: function () {
-        
-        
+    start: function () {      
         appData.budget = +salaryAmount.value;
 
         appData.getExpenses();
@@ -61,7 +56,6 @@ let appData = {
 
         appData.showResult();
 
-
     },
     showResult: function () {
         budgetMonthValue.value = appData.budgetMonth;
@@ -70,12 +64,11 @@ let appData = {
         additionalExpensesValue.value = appData.addExpenses.join(", ");
         additionalIncomeValue.value = appData.addIncome.join(", ");
         targetMonthValue.value = Math.ceil(appData.getTargetMonth());
-
+//5) Добавить обработчик события внутри метода showResult, который будет отслеживать период и сразу менять значение в поле “Накопления за период” (После нажатия кнопки рассчитать, если меняем ползунок в range, “Накопления за период” меняются динамически аналогично 4-ому пункту)
         periodSelect.addEventListener("input", function(){
             incomePeriodValue.value = appData.budgetMonth * periodSelect.value;
         });
         incomePeriodValue.value = appData.budgetMonth * periodSelect.value;
-
         
     },
     addExpensesBlock: function(){
@@ -97,6 +90,7 @@ let appData = {
             }
         });
     },
+//2) Создать метод addIncomeBlock аналогичный addExpensesBlock
     addIncomeBlock: function(){
         
         let cloneIncomeItem = incomeItems[0].cloneNode(true);
@@ -107,6 +101,7 @@ let appData = {
         };
         
     },
+//1) Переписать метод getIncome аналогично getExpenses
     getIncome: function(){
         incomeItems.forEach(function(item){
             let itemIncome = item.querySelector(".income-title").value;
@@ -115,7 +110,6 @@ let appData = {
                 appData.income[itemIncome] = cashIncome;
             }
         })
-    
 
         for (let key in appData.income) {
             appData.incomeMonth += +appData.income[key]
@@ -150,6 +144,7 @@ let appData = {
             appData.expensesMonth += +appData.expenses[key]
         }
     },
+//3) Округлить вывод дневного бюджета
     getBudget: function () {
         return appData.budgetMonth = appData.budget + appData.incomeMonth - appData.expensesMonth,
             appData.budgetDay = Math.ceil(appData.budgetMonth / 30);
@@ -168,6 +163,7 @@ let appData = {
             return "Что то пошло не так"
         }
     },
+//4) Число под полоской (input type range) должно меняться в зависимости от позиции range, используем событие input.
     getPeriod: function() {
         periodAmount.innerHTML = periodSelect.value;
     },
@@ -185,9 +181,6 @@ start.addEventListener("click", appData.start);
 periodSelect.addEventListener("input", appData.getPeriod )
 expensesPlus.addEventListener("click", appData.addExpensesBlock);
 incomePlus.addEventListener("click", appData.addIncomeBlock);
-
-
-
 
 appData.getTargetMonth();
 appData.getStatusIncome();
