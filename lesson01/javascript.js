@@ -57,27 +57,35 @@ let appData = {
         this.blockInput();    
     },
     blockInput: function() {
-        let inputs = document.querySelectorAll("[type=text]");
+        let inputs = document.querySelectorAll("input");
         for (let i = 0; i < inputs.length; i++) {
             inputs[i].disabled = true;    
         };
+        
         btnPlus[0].disabled = true;
         btnPlus[1].disabled = true;
 // после этого кнопка Рассчитать пропадает и появляется кнопка Сбросить, на которую навешиваем событие и выполнение метода reset (стр 210)
         start.style.display="none";
         cancel.style.display="block"
+        
     },
     reset: function() {
-        let inputs = document.querySelectorAll("[type=text]")
+        let inputs = document.querySelectorAll("input")
 //Метод reset должен всю программу возвращать в исходное состояние
         for (let i = 0; i < inputs.length; i++) {
             inputs[i].disabled = false;
-            inputs[i].value = "";    
+            inputs[i].value = null;    
         };
         btnPlus[0].disabled = false;
         btnPlus[1].disabled = false;
         cancel.style.display="none";
         start.style.display="block";    
+        start.disabled = true;
+        periodSelect.value = 1;
+        periodAmount.innerHTML = 1;
+        incomePeriodValue.value = 0;
+        appData.budgetMonth = null;
+        
     },
     blockStart: function() {
         if (salaryAmount.value.length > 0) {
@@ -149,7 +157,7 @@ let appData = {
         addExpenses.forEach(function(item){
             item = item.trim();
             if(item !== ""){
-                this.addExpenses.push(item);
+                appData.addExpenses.push(item);
             }
         })
     },
@@ -157,7 +165,7 @@ let appData = {
         additionalIncomeItem.forEach(function(item){
             let itemValue = item.value.trim();
             if (itemValue !== ""){
-                this.addIncome.push(itemValue);
+                appData.addIncome.push(itemValue);
             }
         });
     },
