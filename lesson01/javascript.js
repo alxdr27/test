@@ -74,22 +74,33 @@ let appData = {
 //Метод reset должен всю программу возвращать в исходное состояние
         for (let i = 0; i < inputs.length; i++) {
             inputs[i].disabled = false;
-            inputs[i].value = null;    
+            inputs[i].value = "";    
         };
         btnPlus[0].disabled = false;
         btnPlus[1].disabled = false;
         cancel.style.display="none";
         start.style.display="block";    
         start.disabled = true;
+        appData.budgetMonth = 0;
+        appData.budget = 0;
         periodSelect.value = 1;
         periodAmount.innerHTML = 1;
-        incomePeriodValue.value = 0;
-        appData.budgetMonth = null;
         
+            this.income = {};
+            this.incomeMonth = 0;
+            this.addIncome = [];
+            this.addExpenses = [];
+            this.deposit = false;
+            this.percentDeposit = 0;
+            this.moneyDeposit = 0;
+            this.budget = 0;
+            this.budgetDay = 0;
+            this.budgetMonth = 0;
+            this.expensesMonth = 0;
+            this.expenses = {};
     },
     blockStart: function() {
         if (salaryAmount.value.length > 0) {
-            console.log(salaryAmount.value.length)
             start.disabled = false;
         }
     },
@@ -148,8 +159,8 @@ let appData = {
             }
         })
 
-        for (let key in this.income) {
-            this.incomeMonth += +this.income[key]
+        for (let key in appData.income) {
+            appData.incomeMonth += +appData.income[key]
         }
     },
     getAddExpenses: function(){
@@ -183,7 +194,7 @@ let appData = {
     },
 
     getBudget: function () {
-        return this.budgetMonth = appData.budget + this.incomeMonth - this.expensesMonth,
+        return this.budgetMonth = this.budget + this.incomeMonth - this.expensesMonth,
             this.budgetDay = Math.ceil(this.budgetMonth / 30);
     },
     getTargetMonth: function () {
